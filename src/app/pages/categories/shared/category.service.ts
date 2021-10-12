@@ -11,7 +11,7 @@ import { Category } from './category.model';
 })
 export class CategoryService {
 
-  private apiPath: string = 'api/categories';
+  private apiPath = 'api/categories';
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +22,7 @@ export class CategoryService {
       );
   }
 
-  getById(id: number): Observable<Category>{
+  getById(id: number): Observable<Category> {
     const url = `${this.apiPath}/${id}`;
     return this.http.get(url).pipe(
       catchError(this.handleError),
@@ -30,14 +30,14 @@ export class CategoryService {
     );
   }
 
-  create(category: Category): Observable<Category>{
+  create(category: Category): Observable<Category> {
     return this.http.post(this.apiPath, category).pipe(
       catchError(this.handleError),
       map(this.jsonDataToCategory)
     );
   }
 
-  update(category: Category): Observable<Category>{
+  update(category: Category): Observable<Category> {
     const url = `${this.apiPath}/${category.id}`;
     return this.http.put(url, category).pipe(
       catchError(this.handleError),
@@ -46,7 +46,7 @@ export class CategoryService {
     );
   }
 
-  delete(id: number): Observable<any>{
+  delete(id: number): Observable<any> {
     const url = `${this.apiPath}/${id}`;
     return this.http.delete(url).pipe(
       catchError(this.handleError),
@@ -65,7 +65,7 @@ export class CategoryService {
     return jsonData as Category;
   }
 
-   private handleError(error: any): Observable<any>{
+   private handleError(error: any): Observable<any> {
     console.log('ERRO NA REQUISIÇÃO => ', error);
     return throwError(error);
   }
